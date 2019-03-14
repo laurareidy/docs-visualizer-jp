@@ -9,7 +9,7 @@ Visualizer の使用中にエラーや問題が発生した場合は、次の解
 |エラーメッセージ |原因 |解決策
 |`You don’t have access to any ${environment_type} environments. You can request access from your org admin.`
 | 指定された環境が組織またはビジネスグループに設定されていないか、必要な権限がありません。
-|xref:access-management::roles.adoc[ロール権限]の詳細を確認するか、組織のシステム管理者に Runtime Manager の*「CloudHub Network Viewer (CloudHub ネットワーク閲覧者)」*権限を要求します。
+|xref:access-management::roles.adoc[ロール権限]の詳細を確認するか、組織のシステム管理者に Runtime Manager の *「CloudHub Network Viewer (CloudHub ネットワーク閲覧者)」* 権限を要求します。
 |`There are no services to show in the selected environments. You may need to update your applications' runtime versions so they can appear in the Visualizer.`
 |Visualizer は現在、CloudHub および特定のランタイムを使用するスタンドアロン Mule Runtime エンジンにデプロイされたアプリケーションのみをサポートしています。
 |サポートされている環境にアプリケーションがデプロイされているにも関わらず、Visualizer のキャンバスにそれらが表示されない場合は、サポートされている Mule Runtime エンジンを使用するようにアプリケーションを更新しなければならない可能性があります。xref:setup.adoc[サポートされている Mule Runtime エンジン]のリストを参照してください。
