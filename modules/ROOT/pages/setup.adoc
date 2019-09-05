@@ -11,78 +11,187 @@ Anypoint Visualizer にアクセスするには、次のいずれかの権限を
 
 * *[Runtime Manager] > [Read Applications (アプリケーションの参照)]*: ユーザはアプリケーションネットワークのグラフを表示できますが、変更することはできません。
 * *[Visualizer] > [Visualizer Editor (Visualizer エディタ)]*: ユーザはアプリケーションネットワークのグラフを表示および変更できます。 +
-xref:access-management::roles.adoc#custom-roles[カスタムロール]を作成して *「Visualizer Editor (Visualizer エディタ)」* 権限を割り当てることができます。
+xref:access-management::roles.adoc#custom-roles[​カスタムロール​]​を作成して​*​「Visualizer Editor (Visualizer エディタ)」​*​権限を割り当てることができます。
 [NOTE]
-*「Visualizer Editor (Visualizer エディタ)」*権限は、マスタ組織内でのみ割り当てることができます。
+​*​「Visualizer Editor (Visualizer エディタ)」​*​権限は、マスタ組織内でのみ割り当てることができます。
 
+== CloudHub のセットアップ
 
-== サポートされている CloudHub ランタイムの確認
+=== サポートされている CloudHub Mule Runtime Engine (Mule) バージョンの確認
 
-Anypoint Visualizer には、サポートされている Muleランタイムエンジンにデプロイされたアプリケーションからのアクティビティのみが含まれます。Mule アプリケーションまたは API をデプロイするときに、デプロイ対象としてサポートされている Mule Runtime エンジンを使用していることを確認してください。
+Anypoint Visualizer には、サポートされているバージョンの Mule Runtime Engine (Mule) にデプロイされたアプリケーションからのアクティビティのみが含まれます。Mule アプリケーションまたは API をデプロイするときに、デプロイメント対象としてサポートされているバージョンの Mule を使用していることを確認してください。
 
-Anypoint Visualizer は、*CloudHub* で実行される次の Mule Runtime エンジンをサポートしています。
+Anypoint Visualizer は、CloudHub で実行される次の Mule バージョンをサポートしています。
 
-* Mule Runtime、バージョン 3.9.1+
-* Mule Runtime、バージョン 3.9.1-AM
-* Mule Runtime、バージョン 4.1.1x
-* Mule Runtime、バージョン 4.1.1-AM
+* Mule バージョン 3.9.x
+* Mule バージョン 4.1.x
+* Mule バージョン 4.2.x
+
+[NOTE]
+2018 年 6 月 30 日より前にリリースされた Mule バージョンの場合、適切な Visualizer エージェントを使用するように Mule のバージョンをこのセクションにリストされているサポート対象バージョンのいずれかにアップグレードします。CloudHub アプリケーション、API、およびプロキシのダウンタイムなしでこの更新を実行できます。
 
 これらのバージョンは、*[Runtime Manager] > [Runtime Version (ランタイムバージョン)]* にリストされています。ランタイムバージョンドロップダウンで *[Show old patch releases (古いパッチリリースを表示)]* セクションを展開します。
 
+=== メトリクスでサポートされている Mule Runtime Engine (Mule) バージョンの確認
+
+Visualizer に表示されるメトリクスは、Anypoint Monitoring から取得されます。そのため、Anypoint Monitoring でもサポートされている Mule バージョンで実行されるアプリケーションのメトリクスのみが Visualizer に表示されます。
+
+* Mule 4.1.x
+* 2019 年 4 月 5 日以降に使用できる Mule 3.9.x パッチリリース。アプリケーションと関連するメトリクスを Visualizer に表示するには、次のセクションの説明に従ってアップグレードした後に Monitoring エージェントも有効にする必要があります。 
+* 2019 年 3 月 22 日以降に使用できる Mule 4.1.x パッチリリース。アプリケーションと関連するメトリクスを Visualizer に表示するには、次のセクションの説明に従ってアップグレードした後に Monitoring エージェントも有効にする必要があります。
+* Mule 4.2.x
+
 [NOTE]
-====
-Anypoint Monitoring のメトリクスは、Mule `-AM` バージョンが実行されるアプリケーションにのみ表示されます。 +
-2018 年 6 月 30 日より前にリリースされた Mule Runtime エンジンを使用しているアプリケーションの場合、適切な Visualizer エージェントを使用するように Mule Runtime エンジンを更新する必要もあります。CloudHub アプリケーション、API、およびプロキシのダウンタイムなしでこの更新を実行できます。
-====
+現在、3.9.x-AM または 4.x-AM で実行されているアプリケーションで Anypoint Monitoring が有効になっている場合、監視はそれらのアプリケーションで引き続き機能します。 +
+使用可能になり次第より優れた機能や最新のパッチ更新を取得するには、非 AM Mule バージョン (3.9.x および 4.x) で実行するようにアプリケーションを更新します。
 
-== サポートされているスタンドアロン Mule Runtime エンジンの確認
+=== 2019 年 3 月 22 日以降の Mule バージョン 4.1 のアップグレードまたは 2019 年 4 月 5 日以降の Mule バージョン 3.9 のアップグレードのための Monitoring エージェントの有効化
 
-Anypoint Visualizer は、スタンドアロン Mule Runtime エンジンのデプロイで次の Mule Runtime エンジンをサポートしています。
+Mule バージョン 3.9.x (2019 年 4 月 5 日以降にリリース) または 4.1.x (2019 年 3 月 22 日以降にリリース) にアップグレードする場合、アプリケーションとメトリクスを Visualizer に表示するには Anypoint Monitoring エージェントを有効にする必要があります。
 
-* Mule Runtime、バージョン 3.8.5+
-* Mule Runtime、バージョン 3.9.1+
-* Mule Runtime、バージョン 4.1.1+
+Anypoint Monitoring エージェントを有効にする手順は、次のとおりです。
 
+. 「*Anypoint Monitoring User (Anypoint Monitoring ユーザ)*」権限を持つユーザであることを確認します。
+. Anypoint Platform にサインインし、*[Anypoint Monitoring]* をクリックします。
+. *[Settings (設定)]* をクリックします。
+. *[CloudHub]* を選択します。
+. *[Environment (環境)]* ドロップダウンリストから、環境を選択します。
+. *[List of resources in <Environment Name> (<環境名> のリソースのリスト)]* で、視覚化するアプリケーションを検索します。
+. アプリケーションの横にある *[Enable & Apply (有効化 & 適用)]* をクリックして、アプリケーションの視覚化と監視を有効にします。
+
+Anypoint Monitoring についての詳細は、xref:monitoring::enable-apps-deployed-to-cloud.adoc[「UI を使用した監視の有効化」]を参照してください。
+
+== スタンドアロン Mule および Runtime Fabric のセットアップ
+
+=== スタンドアロン Mule と Runtime Fabric のサポートされている Mule バージョン
+
+Anypoint Visualizer は、スタンドアロン Mule および Runtime Fabric デプロイメントで次の Mule バージョンをサポートしています。
+
+[%header,cols="2*a"]
+|===
+|デプロイメント種別| サポートされている Mule バージョン
+| Mule スタンドアロン 
+a| * Mule 3.8.7
+* Mule 3.9.1+
+* Mule 4.1.x 
+* Mule 4.2.x
+
+| Runtime Fabric
+a| * Mule 3.8.7
+* Mule 3.9.1+
+* Mule 4.1.2+ 
+* Mule 4.2.0
+|===
+
+[NOTE]
+デフォルトでは、Mule 4 で Visualizer は無効になっています。つまり、Mule 4 は Visualizer に表示されますが、Mule 4 アプリケーションの適切な接続は表示されません。  詳細は、「<<enable_header_injection,ヘッダー挿入の有効化>>」を参照してください。 
+
+=== スタンドアロン Mule のセットアップ
+
+スタンドアロン Mule デプロイメントの Visualizer をサポートするには、xref:monitoring::am-installing.adoc[Anypoint Monitoring エージェントをインストール]します。 
+
+=== Runtime Fabric のセットアップ
+
+xref:runtime-fabric::install-create-rtf-arm.adoc[Runtime Fabric をセットアップ]する手順を実行します。Runtime Fabric をインストールすると、実行されていて Runtime Fabric にデプロイされている Visualizer でアプリケーションを表示できるようになります。
+
+Visualizer は、ヘッダー挿入を利用してサービス間の接続を適切に表示します。Mule 4 の場合、デフォルトではヘッダー挿入が無効になっています。Mule 4 Runtime Fabric アプリケーションでは、<<enable_header_injection,ヘッダー挿入を有効化>>するまで適切な接続が表示されません。 
+
+既知の制限:
+
+* 古い Visualizer エージェント (2019 年 4 月 5 日より前のバージョン) の Mule 3 CloudHub アプリケーションで Runtime Fabric イングレスエンドポイントをコールする場合、CloudHub アプリケーションからコントローラの IP アドレスが設定されたノードまでに追加のエッジがあります。Mule Runtime Engine の最新リリースにアップグレードしてください。
+* Mule 4 CloudHub アプリケーションで Runtime Fabric イングレスエンドポイントをコールする場合、CloudHub アプリケーションからコントローラの IP アドレスが設定されたノードまでに追加のエッジがあります。Visualizer 内で検索条件を使用して、このノードを非表示にできます。
+* Runtime Fabric Mule アプリケーションで DNS を使用して古い Visualizer エージェント (2019 年 4 月 5 日より前のバージョン) の Mule 3 CloudHub Mule アプリケーションをコールする場合、適切な接続が表示されますが、​*​外部トラフィック​*​ノードから CloudHub アプリケーションまでに追加のエッジがあります。
+* Runtime Fabric Mule アプリケーションで DNS を使用して Mule 4 CloudHub Mule アプリケーションをコールする場合、適切な接続が表示されますが、​*​外部トラフィック​*​ノードから CloudHub アプリケーションまでに追加のエッジがあります。
+* 2 つの異なるクラスタ内に同じ名前のアプリケーションがある場合、それらのアプリケーションは 1 つのノードとしてキャンバスに表示されます。一方のアプリケーションの名前を変更する必要があります。 
+
+
+[[enable_header_injection]]
+=== ヘッダー挿入の有効化
+
+Visualizer では、スタンドアロン Mule および Runtime Fabric デプロイメントの追加のヘッダー挿入が必要です。
+ただし、Mule 4.1.x のパフォーマンスへの潜在的な影響のため、ヘッダー挿入はデフォルトで無効になっています。
+
+Runtime Manager でヘッダー挿入を有効にします。
+
+[NOTE]
+Runtime Fabric の場合、アプリケーションレベルでヘッダー挿入を有効にする必要があります。 +
+スタンドアロン Mule デプロイメントの場合、アプリケーションレベルではなくサーバレベルでヘッダー挿入を有効にする必要があります。これは、サーバで実行されているすべてのアプリケーションに影響します。
+
+. Runtime Manager のアプリケーションまたはサーバの管理ページでヘッダー挿入を有効にする手順は、次のとおりです。 +  
+* Runtime Fabric にデプロイされたアプリケーションのヘッダー挿入を有効にするには、左側のメニューの *[Applications (アプリケーション)]* をクリックし、ヘッダー挿入を有効にするアプリケーションを選択して、*[Manage Application (アプリケーションを管理)]* をクリックします。 
+* スタンドアロン Mule にデプロイされたアプリケーションのヘッダー挿入を有効にするには、左側のメニューの *[Server (サーバ)]* をクリックし、ヘッダー挿入を有効にするサーバを選択して、*[Manage Server (サーバを管理)]* をクリックします。 
+. アプリケーションをデプロイするときにヘッダー挿入を有効にするには、デプロイメントページで *[Deploy application (アプリケーションをデプロイ)]* をクリックします。 
+. *[Properties (プロパティ)]* タブをクリックし、サーバ (Mule スタンドアロンデプロイメント) またはアプリケーション (Runtime Fabric デプロイメント) のいずれかで次のプロパティを設定します。 +
+----
+anypoint.platform.config.analytics.agent.header_injection.disabled=false
+----
+
+[NOTE]
+このプロパティはデフォルトで `disabled` に設定されているため、ヘッダー挿入を有効にするには、例のようにプロパティを `false` に設定する必要があります。
 
 == サポートされているコネクタの確認
 
 Anypoint Visualizer は、特定のコネクタ上のアウトバウンド接続のアクティビティを監視できます。
 
-Mule Runtime エンジンのバージョン 3.9.x では、次のコネクタがサポートされています。
+Mule バージョン 3.9.x では、次のコネクタがサポートされています。
 
 * Salesforce
 * HTTP/HTTPS
 * データベース
 * Connector DevKit に基づくすべてのコネクタ
 
-Mule Runtime エンジンのバージョン 4.1.x では、次のコネクタがサポートされています。
+Mule バージョン 4.1.x では、次のコネクタがサポートされています。
 
 * Salesforce
 * HTTP/HTTPS
 * データベース
 * Mule 4 拡張コネクタ
 
-== スタンドアロン Mule Runtime エンジンの設定
+== 専用ロードバランサ
 
-スタンドアロン Mule Runtime エンジンのデプロイをサポートするには、xref:monitoring::am-installing.adoc[Anypoint Monitoring エージェントをインストール]する必要があります。
-
-[NOTE]
-Anypoint Visualizer は現在、CloudHub またはスタンドアロン Mule Runtime エンジンでデプロイされた Mule アプリケーション、API、およびプロキシをサポートしています。2018 年 12 月 15 日以降、スタンドアロン Mule Runtime でのアプリケーションのサポートが段階的にロールアウトされています。アクセス権の取得については、カスタマーサクセス担当者にお問い合わせください。
-
+Visualizer は、Mule バージョン 3.9.x (2019 年 4 月 5 日以降にリリース) を使用する CloudHub アプリケーション専用のロードバランサをサポートしています。現時点では、Visualizer は Mule 4 ランタイムバージョンを使用する CloudHub アプリケーション専用ロードバランサの接続を適切に解決できません。
 
 == アプリケーションのデプロイ
 
-Anypoint Visualizer で表示するアプリケーションをデプロイする場合、デプロイ対象としてサポートされているバージョンの Mule Runtime エンジンを選択していることを確認してください。詳細は、xref:runtime-manager::index.adoc[「Runtime Manager」]を参照してください。
+Anypoint Visualizer で表示するアプリケーションをデプロイする場合、デプロイメント対象としてサポートされているバージョンの Mule を選択していることを確認してください。詳細は、xref:runtime-manager::index.adoc[「Runtime Manager」]を参照してください。
 
 アプリケーションを再デプロイすると、Anypoint Visualizer によって収集されたすべてのメタデータはそのアプリケーションから削除されます。アプリケーションノードのインバウンド接続数はリセットされます。
 
 == データ収集の無効化
 
-Anypoint Visualizer でメタデータを収集するために使用されるエージェントは、パフォーマンスに影響する可能性があります。アプリケーションのパフォーマンスへの影響を軽減するため、次のいずれかを実行できます。
+Anypoint Visualizer でメタデータを収集するために使用されるエージェントは、パフォーマンスに影響する可能性があります。 
 
-* デフォルトの Mule Runtime エンジンを使用してアプリケーションをデプロイする。
-* 特定のアプリケーションのデータ収集を無効にする。アプリケーションのデータ収集を無効にするには、アプリケーションを再デプロイして次のアプリケーションプロパティを設定します。
+CloudHub で実行されるアプリケーションのパフォーマンスへの潜在的な影響を軽減するには、データ収集を無効にします。
+
+=== 2019 年 3 月 22 日より前にリリースされた Mule バージョン 4 または 2019 年 4 月 5 日より前にリリースされた Mule バージョン 3.9
+
+CloudHub で実行されるアプリケーションのパフォーマンスへの潜在的な影響を軽減する手順は、次のとおりです。
+
+. アプリケーションプロパティ `anypoint.platform.config.visualizer.agent.enabled=false` を設定します。
+. アプリケーションを再デプロイします。
+
+=== 2019 年 3 月 22 日以降にリリースされた Mule バージョン 4 または 2019 年 4 月 5 日以降にリリースされた Mule バージョン 3.9
+
+CloudHub で実行されるアプリケーションの監視によるパフォーマンスへの影響を軽減するには、Monitoring エージェントを無効にします。
+
+. ​*​「Anypoint Monitoring User (Anypoint Monitoring ユーザ)」​*​権限を持つユーザであることを確認します。
+. Anypoint Platform にサインインし、*[Anypoint Monitoring]* をクリックします。
+. *[Settings (設定)]* をクリックします。
+. *[CloudHub]* を選択します。
+. *[Environment (環境)]* ドロップダウンリストから、環境を選択します。
+. *[List of resources in <Environment Name> (<環境名> のリソースのリスト)]* で、メトリクスを表示するアプリケーションを検索します。
+. アプリケーションの横にある *[Disable & Apply (無効化 & 適用)]* をクリックして、アプリケーションの監視を無効にします。
+
+=== スタンドアロン Mule のパフォーマンスの管理
+
+スタンドアロン Mule で実行されるアプリケーションのパフォーマンスへの影響をサーバレベルで軽減します。次のいずれかの操作を実行できます。
+
+* Anypoint Monitoring エージェントがインストールされていないサーバにアプリケーションをデプロイする。
+* サーバレベルで次のプロパティを設定して、特定のサーバと、そのサーバにデプロイされたすべてのアプリケーションのデータ収集を無効にする。
 +
 ----
-anypoint.platform.config.visualizer.agent.enabled=true/false
+anypoint.platform.config.analytics.agent.disabled=true 
 ----
++
+[NOTE]
+このプロパティにより、サーバのアプリケーションの監視も無効になります。
